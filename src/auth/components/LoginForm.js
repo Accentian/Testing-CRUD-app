@@ -40,7 +40,7 @@ export const LoginForm = (props) => {
         <LabeledTextField name="email" label="Email" placeholder="Email" />
         <LabeledTextField name="password" label="Password" placeholder="Password" type="password" />
         <div>
-          <Link href={Routes.ForgotPasswordPage()}>
+          <Link legacyBehavior href={Routes.ForgotPasswordPage()}>
             <a>Forgot your password?</a>
           </Link>
         </div>
@@ -52,7 +52,7 @@ export const LoginForm = (props) => {
         }}
       >
         Or{" "}
-        <Link href={Routes.SignupPage()}>
+        <Link legacyBehavior href={Routes.SignupPage()}>
           <a>Sign Up</a>
         </Link>
       </div>
