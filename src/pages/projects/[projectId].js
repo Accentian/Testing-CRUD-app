@@ -8,6 +8,12 @@ import { useParam } from "@blitzjs/next"
 import Layout from "src/core/layouts/Layout"
 import getProject from "src/projects/queries/getProject"
 import deleteProject from "src/projects/mutations/deleteProject"
+
+/**
+ * Import the styles for CSS
+ */
+import styles from "src/styles/Home.module.css"
+
 export const Project = () => {
   const router = useRouter()
   const projectId = useParam("projectId", "number")
@@ -21,36 +27,43 @@ export const Project = () => {
         <title>Project {project.id}</title>
       </Head>
 
-      <div>
-        <h1>Project {project.id}</h1>
-        <pre>{JSON.stringify(project, null, 2)}</pre>
-
-        <Link
-          legacyBehavior
-          href={Routes.EditProjectPage({
-            projectId: project.id,
-          })}
-        >
-          <a>Edit</a>
-        </Link>
-
-        <button
-          type="button"
-          onClick={async () => {
-            if (window.confirm("This will be deleted")) {
-              await deleteProjectMutation({
-                id: project.id,
-              })
-              await router.push(Routes.ProjectsPage())
-            }
-          }}
-          style={{
-            marginLeft: "0.5rem",
-          }}
-        >
-          Delete
-        </button>
+      {/* Modified the content by including CSS styles */}
+      <div className={styles.body}>
+        <div className={styles.code}>
+          <code>
+            <h1>Project {project.id}</h1>
+            <div>
+              <code>Project Information:</code>
+              <pre>{JSON.stringify(project, null, 2)}</pre>
+            </div>
+          </code>
+        </div>
       </div>
+      <Link
+        legacyBehavior
+        href={Routes.EditProjectPage({
+          projectId: project.id,
+        })}
+      >
+        <a>Edit</a>
+      </Link>
+
+      <button
+        type="button"
+        onClick={async () => {
+          if (window.confirm("This will be deleted")) {
+            await deleteProjectMutation({
+              id: project.id,
+            })
+            await router.push(Routes.ProjectsPage())
+          }
+        }}
+        style={{
+          marginLeft: "0.5rem",
+        }}
+      >
+        Delete
+      </button>
     </>
   )
 }

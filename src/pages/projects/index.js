@@ -6,6 +6,12 @@ import { usePaginatedQuery } from "@blitzjs/rpc"
 import { useRouter } from "next/router"
 import Layout from "src/core/layouts/Layout"
 import getProjects from "src/projects/queries/getProjects"
+
+/**
+ * Import the styles for CSS
+ */
+import styles from "src/styles/Home.module.css"
+
 const ITEMS_PER_PAGE = 100
 export const ProjectsList = () => {
   const router = useRouter()
@@ -55,6 +61,10 @@ export const ProjectsList = () => {
     </div>
   )
 }
+
+/**
+ * Modified the page by including some CSS format and structure from ..\src\pages\index.js
+ */
 const ProjectsPage = () => {
   return (
     <Layout>
@@ -62,16 +72,29 @@ const ProjectsPage = () => {
         <title>Projects</title>
       </Head>
 
-      <div>
-        <p>
-          <Link legacyBehavior href={Routes.NewProjectPage()}>
-            <a>Create Project</a>
-          </Link>
-        </p>
+      <div className={styles.body}>
+        {/* Listing Field */}
+        <div className={styles.instructions}>
+          <p>
+            <strong>Project Listings</strong>
+          </p>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <ProjectsList />
-        </Suspense>
+          <div className={styles.code}>
+            <pre>
+              <code>
+                <Link href={Routes.NewProjectPage()} className={styles.textLink}>
+                  Create Project
+                </Link>
+              </code>
+            </pre>
+
+            <code>
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProjectsList />
+              </Suspense>
+            </code>
+          </div>
+        </div>
       </div>
     </Layout>
   )
